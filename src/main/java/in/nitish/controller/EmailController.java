@@ -13,7 +13,7 @@ import in.nitish.service.EmailService;
 public class EmailController {
 
 	@Autowired
-	private EmailService emailService;
+	EmailService emailService;
 
 	// Sending a simple Email
 	@PostMapping("/sendMail")

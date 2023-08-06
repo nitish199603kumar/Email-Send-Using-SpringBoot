@@ -9,5 +9,6 @@ public interface EmailService {
 	// To send a simple email
     String sendSimpleMail(EmailDtlsWithoutAttachment details);
     String sendMailWithAttachment(EmailDetails details);
-
+    
+    
 }
