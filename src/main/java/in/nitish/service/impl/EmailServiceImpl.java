@@ -50,6 +50,8 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public String sendSimpleMail(EmailDtlsWithoutAttachment details) {
+		
+		System.out.println("sendSimpleMail");
 
 		try {
 
@@ -132,6 +134,7 @@ public class EmailServiceImpl implements EmailService {
 			return "Mail Sent Successfully";
 
 		} catch (Exception e) {
+			
 			return "Error While Sending Mail";
 
 		}
