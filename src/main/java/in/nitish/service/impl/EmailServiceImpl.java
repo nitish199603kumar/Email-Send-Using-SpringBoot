@@ -125,9 +125,8 @@ public class EmailServiceImpl implements EmailService {
 			mimeMessageHelper.setSubject(details.getSubject());
 
 //			FileSystemResource fileSystemResource = new FileSystemResource(new File(details.getAttachment()));
-//
 //			mimeMessageHelper.addAttachment(fileSystemResource.getFilename(), fileSystemResource);
-			System.out.println("hi");
+			System.out.println("attachment " +convertHtmlToPdf);
 			mimeMessageHelper.addAttachment("test.pdf", new ByteArrayResource(convertHtmlToPdf));
 			javaMailSender.send(mimeMessage);
 
@@ -141,18 +140,24 @@ public class EmailServiceImpl implements EmailService {
 
 	}
 	private byte[] generatePdf(String htmlData) {
+		
+		FileOutputStream fileOutputStream=null;
 	
 		ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
 		try {
+			fileOutputStream=new FileOutputStream(new File("C:\\Users\\NKSK\\Desktop\\234556789.pdf"));
 			PdfWriter pdfWriter=new PdfWriter(byteArrayOutputStream);
 			DefaultFontProvider defaultFontProvider=new DefaultFontProvider(true,false,false);
 			ConverterProperties converterProperties=new ConverterProperties();
 			converterProperties.setFontProvider(defaultFontProvider);
 			HtmlConverter.convertToPdf(htmlData, pdfWriter,converterProperties);
 			System.out.println("pdf generated");
+			fileOutputStream.write(byteArrayOutputStream.toByteArray());
+			System.out.println("Pdf write successfully" );
 			return byteArrayOutputStream.toByteArray();
 	}catch (Exception e) {
-		
+		e.printStackTrace();
+		System.out.println("Exception in pdf generation");
 	}
 	return null;
 }
